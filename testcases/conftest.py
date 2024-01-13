@@ -1,11 +1,10 @@
 # !/usr/bin/python3
 # -*- coding: utf-8 -*-import pytest
 import pytest
-from playwright.sync_api import sync_playwright
 from loguru import logger
+from playwright.sync_api import sync_playwright
 
 from pages.login_page import LoginPage
-
 
 # @Author: 花菜
 # @File: conftest.py
@@ -13,28 +12,16 @@ from pages.login_page import LoginPage
 # @Email: lihuacai168@gmail.com
 
 
-# 创建一个 pytest fixture 实现浏览器的初始化和结束操作
-# @pytest.fixture(scope="session")
-# def page():
-#     with sync_playwright() as p:
-#         browser = p.chromium.launch(headless=False)
-#         context = browser.new_context()
-#         page = context.new_page()
-#         yield page
-#         browser.close()
-
-
-# 创建一个 pytest fixture 实现浏览器的初始化和结束操作
 @pytest.fixture(scope="session")
 def page():
     with sync_playwright() as p:
-        logger.info("starting....")
-        browser = p.chromium.launch(headless=True, timeout=5000)
+        logger.info("page session fixture starting....")
+        browser = p.chromium.launch(headless=True, timeout=5_000)
         context = browser.new_context()
         page = context.new_page()
         context.tracing.start(screenshots=True, snapshots=True, sources=True)
         yield page
-        logger.info("closing.......")
+        logger.info("page session fixture closing.......")
         context.tracing.stop(path="trace.zip")
         browser.close()
 

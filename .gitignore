@@ -874,3 +874,6 @@ fabric.properties
 .idea/
 testcases/allure-results/
 allure-results/
+
+*/*.log
+*/trace.zip
