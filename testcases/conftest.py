@@ -27,7 +27,7 @@ def page():
 
 
 # 创建一个 pytest fixture 实现登录操作，并设置为session级别，实现共享登录状态
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def login(page, pytestconfig):
     default_url = "http://119.91.147.215"
     login_page = LoginPage(
