@@ -1,0 +1,6 @@
+pytest-playwright
+allure-pytest
+
+pytest~=7.4.4
+playwright~=1.40.0
+loguru~=0.7.2
