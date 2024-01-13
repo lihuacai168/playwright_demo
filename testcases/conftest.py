@@ -28,8 +28,25 @@ def page():
 
 # 创建一个 pytest fixture 实现登录操作，并设置为session级别，实现共享登录状态
 @pytest.fixture(scope="session")
-def login(page):
-    login_page = LoginPage(page)
+def login(page, pytestconfig):
+    default_url = "http://119.91.147.215"
+    login_page = LoginPage(
+        page, pytestconfig.getoption("base_url") or "http://119.91.147.215"
+    )
+    if login_page.base_url == default_url:
+        logger.warning("使用默认登录地址，如果需要修改请使用命令行参数 --base-url")
+
     login_page.login("test", "test2020")
     yield login_page
     # 可以在这里添加断言确认登录成功
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--host",
+        action="store",
+        default="http://119.91.147.215",
+        help="base URL for login page",
+    )
+    logger.info("添加命令行参数 host")
+    # parser.addoption("--base-url", action="store", default="http://119.91.147.215", help="base URL for login page")

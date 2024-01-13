@@ -12,10 +12,9 @@ import allure
 
 
 class LoginPage:
-    def __init__(self, page: Page):
+    def __init__(self, page: Page, base_url: str):
         self.page = page
-        self.base_url = "http://119.91.147.215"
-        # self.base_url = "https://fast.huacai.one"
+        self.base_url = base_url
 
     # 定义页面元素
     def username_input(self):
@@ -30,7 +29,7 @@ class LoginPage:
     # 定义操作
     @allure.step("打开登录页面，填写账号密码")
     def login(self, username: str, password: str):
-        logger.info("打开登录页面，填写账号密码")
+        logger.info(f"打开登录页面: {self.base_url + '/fastrunner/login'}，填写账号密码")
         self.page.goto(self.base_url + "/fastrunner/login")
         self.username_input().fill(username)
         self.password_input().fill(password)

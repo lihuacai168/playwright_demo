@@ -21,12 +21,14 @@ jobs:
         pip install -r requirements.txt
     - name: Ensure browsers are installed
       run: python -m playwright install --with-deps
-    - name: Run your tests
+    - name: Run your tests on default base_url
       run: pytest --tracing=retain-on-failure
+    - name: Run your tests on ssl base_url
+      run: pytest --tracing=retain-on-failure --base-url=https://fast.huacai.one
     - uses: actions/upload-artifact@v3
       if: always()
       with:
-        name: playwright-traces and results
+        name: playwright-traces_and_results
         path: |
           allure-results/
           trace.zip
