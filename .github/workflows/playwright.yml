@@ -26,5 +26,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       if: always()
       with:
-        name: playwright-traces
-        path: allure-results/
+        name: playwright-traces and results
+        path: |
+          allure-results/
+          trace.zip
