@@ -4,8 +4,9 @@ import json
 from urllib.parse import quote
 
 import allure
-from loguru import logger
 from playwright.sync_api import expect
+
+from log import logger
 
 
 # @Author: 花菜

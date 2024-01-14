@@ -1,10 +1,12 @@
 # !/usr/bin/python3
 # -*- coding: utf-8 -*-import pytest
+
 import pytest
-from loguru import logger
 from playwright.sync_api import sync_playwright
 
 from pages.login_page import LoginPage
+
+from log import logger
 
 # @Author: 花菜
 # @File: conftest.py

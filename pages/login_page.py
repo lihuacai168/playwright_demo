@@ -6,9 +6,9 @@
 # @Time : 2024/1/13 00:16
 # @Email: lihuacai168@gmail.com
 
-from loguru import logger
 from playwright.sync_api import Page
 import allure
+from log import logger
 
 
 class LoginPage:
