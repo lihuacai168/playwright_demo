@@ -57,15 +57,16 @@ def auth_page():
 
 
 def _login(page, pytestconfig, is_goto_project_detail=False):
-    default_url = "http://119.91.147.215"
-    base_url = ""
-    if not pytestconfig.getoption("base_url"):
+    if base_url := pytestconfig.getoption("base_url"):
+        logger.info(f"命令行传入参数，base_url={base_url}")
+    else:
+        default_url = "http://119.91.147.215"
+        logger.warning(
+            f"没有传入base-url，会使用默认base_url = {default_url}，如果需要使用--base-url=xxx修改"
+        )
         base_url = default_url
-        logger.warning(f"没有传入base-url，会使用默认{base_url=}，如果需要使用--base-url=xxx修改")
 
-    login_page = LoginPage(
-        page, base_url=base_url
-    )
+    login_page = LoginPage(page, base_url=base_url)
 
     login_page.login("test", "test2020")
     if is_goto_project_detail:
@@ -85,8 +86,6 @@ def login(page, pytestconfig):
 @pytest.fixture(scope="function")
 def login_and_goto_project_detail(page, pytestconfig):
     yield _login(page, pytestconfig, is_goto_project_detail=True)
-
-
 
 
 def pytest_addoption(parser):
