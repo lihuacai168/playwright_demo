@@ -38,7 +38,7 @@ class LoginPage:
         self.page.wait_for_load_state("networkidle", timeout=3_000)
         logger.info("登录成功")
 
-    # @allure.step("切换项目列表首页")
+    @allure.step("切换项目列表首页")
     def switch2project_base(self, project_id=7):
         logger.info("切换项目列表首页")
         self.page.goto(
@@ -46,7 +46,13 @@ class LoginPage:
         )
         self.page.get_by_role("menuitem", name=" 首 页").click()
 
-    # @allure.step("从项目列表进入项目详情")
+    @allure.step("从项目列表进入项目详情")
     def enter_project_detail(self, project_name="示例项目"):
         logger.info(f"从项目列表进入项目详情：{project_name=}")
         self.page.get_by_text(project_name, exact=True).click()
+
+    @allure.step("登录并进入项目详情")
+    def login_and_to_project_detail(self, username, password, project_name):
+        self.login(username, password)
+        self.switch2project_base()
+        self.enter_project_detail(project_name)
