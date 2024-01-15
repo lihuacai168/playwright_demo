@@ -34,4 +34,4 @@ jobs:
         name: playwright-traces_and_results
         path: |
           allure-results/
-          trace.zip
+          *trace.zip

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-import pytest
 
 import pytest
+from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
 
 from pages.login_page import LoginPage
@@ -14,8 +15,12 @@ from log import logger
 # @Email: lihuacai168@gmail.com
 
 
+def extract_domain(url_string):
+    parsed_url = urlparse(url_string)
+    return parsed_url.netloc
+
 @pytest.fixture(scope="session")
-def page():
+def page(pytestconfig):
     with sync_playwright() as p:
         logger.info("page session fixture starting....")
         browser = p.chromium.launch(headless=True, timeout=5_000)
@@ -24,7 +29,10 @@ def page():
         context.tracing.start(screenshots=True, snapshots=True, sources=True)
         yield page
         logger.info("page session fixture closing.......")
-        context.tracing.stop(path="trace.zip")
+        base_url = pytestconfig.getoption("base_url") or "http://119.91.147.215"
+        domain = extract_domain(base_url).replace(".", "_")
+        logger.info("stop tracing...")
+        context.tracing.stop(path=f"{domain}_trace.zip")
         browser.close()
 
 
