@@ -83,7 +83,7 @@ def login(page, pytestconfig):
 
 
 # 创建一个 pytest fixture 实现登录操作，并设置为session级别，实现共享登录状态
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def login_and_goto_project_detail(page, pytestconfig):
     yield _login(page, pytestconfig, is_goto_project_detail=True)
 
