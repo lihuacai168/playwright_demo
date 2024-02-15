@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        base_url: ['', 'https://fast.huacai.one']
+        base_url: ['https://fast.huacai.one']
 
     steps:
     - uses: actions/checkout@v3
