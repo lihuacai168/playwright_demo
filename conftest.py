@@ -30,7 +30,9 @@ def page(pytestconfig):
         context.tracing.start(screenshots=True, snapshots=True, sources=True)
         yield page
         logger.info("page session fixture closing.......")
-        base_url = pytestconfig.getoption("base_url") or "http://119.91.147.215"
+        base_url = (
+            pytestconfig.getoption("base_url") or "http://119.91.147.215"
+        )
         domain = extract_domain(base_url).replace(".", "_")
         logger.info("stop tracing...")
         context.tracing.stop(path=f"{domain}_trace.zip")

@@ -29,7 +29,9 @@ class LoginPage:
     # 定义操作
     @allure.step("打开登录页面，填写账号密码")
     def login(self, username: str, password: str):
-        logger.info(f"打开登录页面: {self.base_url + '/fastrunner/login'}，填写账号密码")
+        logger.info(
+            f"打开登录页面: {self.base_url + '/fastrunner/login'}，填写账号密码"
+        )
         self.page.goto(self.base_url + "/fastrunner/login")
         self.username_input().fill(username)
         self.password_input().fill(password)
@@ -42,7 +44,8 @@ class LoginPage:
     def switch2project_base(self, project_id=7):
         logger.info("切换项目列表首页")
         self.page.goto(
-            self.base_url + f"/fastrunner/api_record/{project_id}", timeout=3000
+            self.base_url + f"/fastrunner/api_record/{project_id}",
+            timeout=3000,
         )
         self.page.get_by_role("menuitem", name=" 首 页").click()
 

@@ -32,7 +32,9 @@ def test_api_list(login_and_goto_project_detail, page) -> None:
     )
     logger.info(f"等待接口地址：{get_api_path}")
     with page.expect_response(get_api_path) as response_info:
-        data = json.loads(response_info.value.request.response().body().decode())
+        data = json.loads(
+            response_info.value.request.response().body().decode()
+        )
         logger.info(f"接口返回数据：{data}")
         expect(page.get_by_text(f"共 {data['count']} 条")).to_be_visible()
         logger.info("检查搜索API列表成功")
@@ -62,11 +64,13 @@ def test_api_add_del(login_and_goto_project_detail: Page, page: Page) -> None:
     # 删除接口
     logger.info("删除接口")
     page.get_by_text(f"POST /hello {api_name}").first.click()
-    page.get_by_role("cell", name="   ").get_by_role("button").nth(3).click()
+    page.get_by_role("cell", name="   ").get_by_role("button").nth(
+        3
+    ).click()
     page.get_by_role("button", name="").click()
     page.get_by_role("button", name="确定").click()
     logger.info("点击确定按钮")
-    expect(page.get_by_text(f"POST /hello {api_name}").first).not_to_be_visible(
-        timeout=1_000
-    )
+    expect(
+        page.get_by_text(f"POST /hello {api_name}").first
+    ).not_to_be_visible(timeout=1_000)
     logger.info("断言删除接口成功")
