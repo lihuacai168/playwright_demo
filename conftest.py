@@ -4,10 +4,9 @@ import os
 from urllib.parse import urlparse
 
 import pytest
-from playwright.sync_api import sync_playwright
-
 from log import logger
 from pages.login_page import LoginPage
+from playwright.sync_api import sync_playwright
 
 # @Author: 花菜
 # @File: conftest.py
@@ -61,9 +60,7 @@ def _login(page, pytestconfig, is_goto_project_detail=False):
         logger.info(f"命令行传入参数，base_url={base_url}")
     else:
         default_url = "http://119.91.147.215"
-        logger.warning(
-            f"没有传入base-url，会使用默认base_url = {default_url}，如果需要使用--base-url=xxx修改"
-        )
+        logger.warning(f"没有传入base-url，会使用默认base_url = {default_url}，如果需要使用--base-url=xxx修改")
         base_url = default_url
 
     login_page = LoginPage(page, base_url=base_url)

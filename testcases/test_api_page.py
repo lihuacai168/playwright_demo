@@ -5,9 +5,8 @@ import uuid
 from urllib.parse import quote
 
 import allure
-from playwright.sync_api import Page, expect
-
 from log import logger
+from playwright.sync_api import Page, expect
 
 
 # @Author: 花菜
@@ -54,9 +53,7 @@ def test_api_add_del(login_and_goto_project_detail: Page, page: Page) -> None:
     page.get_by_placeholder("请输入接口请求地址").fill("/hello")
     page.get_by_role("button", name="Save", exact=True).click()
     logger.info("点击保存按钮")
-    expect(page.get_by_text(f"POST /hello {api_name}").first).to_be_visible(
-        timeout=1_000
-    )
+    expect(page.get_by_text(f"POST /hello {api_name}").first).to_be_visible(timeout=1_000)
     logger.info("断言添加接口成功")
 
     # 删除接口
@@ -66,7 +63,5 @@ def test_api_add_del(login_and_goto_project_detail: Page, page: Page) -> None:
     page.get_by_role("button", name="").click()
     page.get_by_role("button", name="确定").click()
     logger.info("点击确定按钮")
-    expect(page.get_by_text(f"POST /hello {api_name}").first).not_to_be_visible(
-        timeout=1_000
-    )
+    expect(page.get_by_text(f"POST /hello {api_name}").first).not_to_be_visible(timeout=1_000)
     logger.info("断言删除接口成功")

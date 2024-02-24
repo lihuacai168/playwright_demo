@@ -24,7 +24,6 @@ allure_log_handler_flag = 0
 
 class AllureHandler(logging.Handler):
     def emit(self, record):
-
         logging.getLogger(record.name).handle(record)
 
 

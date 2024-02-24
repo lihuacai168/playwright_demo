@@ -1,8 +1,6 @@
 # !/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import allure
-from playwright.sync_api import expect
 
 # @Author: 花菜
 # @File: test_login.py

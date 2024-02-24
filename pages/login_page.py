@@ -6,9 +6,9 @@
 # @Time : 2024/1/13 00:16
 # @Email: lihuacai168@gmail.com
 
-from playwright.sync_api import Page
 import allure
 from log import logger
+from playwright.sync_api import Page
 
 
 class LoginPage:
@@ -41,9 +41,7 @@ class LoginPage:
     @allure.step("切换项目列表首页")
     def switch2project_base(self, project_id=7):
         logger.info("切换项目列表首页")
-        self.page.goto(
-            self.base_url + f"/fastrunner/api_record/{project_id}", timeout=3000
-        )
+        self.page.goto(self.base_url + f"/fastrunner/api_record/{project_id}", timeout=3000)
         self.page.get_by_role("menuitem", name=" 首 页").click()
 
     @allure.step("从项目列表进入项目详情")
