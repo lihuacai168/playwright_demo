@@ -1,13 +1,11 @@
 # !/usr/bin/python3
-# -*- coding: utf-8 -*-
 import json
 import uuid
 from urllib.parse import quote
 
 import allure
-from playwright.sync_api import Page, expect
-
 from log import logger
+from playwright.sync_api import Page, expect
 
 
 # @Author: 花菜

@@ -1,12 +1,10 @@
 # !/usr/bin/python3
-# -*- coding: utf-8 -*-
 import json
 from urllib.parse import quote
 
 import allure
-from playwright.sync_api import expect
-
 from log import logger
+from playwright.sync_api import expect
 
 
 # @Author: 花菜
@@ -24,9 +22,14 @@ def test_case_list(login_and_goto_project_detail, page) -> None:
     get_test_case_path = f"/api/fastrunner/test/?project=7&node=&search={quote(search_testcase_name)}&searchType=1&caseType=&onlyMe=true&page=1"
     logger.info(f"等待接口地址：{get_test_case_path}")
     with page.expect_response(
-        login_and_goto_project_detail.base_url + get_test_case_path, timeout=3000
+        login_and_goto_project_detail.base_url + get_test_case_path,
+        timeout=3000,
     ) as case_response_info:
-        data = json.loads(case_response_info.value.request.response().body().decode())
+        data = json.loads(
+            case_response_info.value.request.response().body().decode()
+        )
         logger.info(f"接口返回数据：{data}")
-        expect(page.get_by_text(f"共 {data['count']} 条")).to_be_visible(timeout=3000)
+        expect(page.get_by_text(f"共 {data['count']} 条")).to_be_visible(
+            timeout=3000
+        )
         logger.info("检查搜索case列表成功")

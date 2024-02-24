@@ -1,13 +1,11 @@
 # !/usr/bin/python3
-# -*- coding: utf-8 -*-import pytest
 import os
 from urllib.parse import urlparse
 
 import pytest
-from playwright.sync_api import sync_playwright
-
 from log import logger
 from pages.login_page import LoginPage
+from playwright.sync_api import sync_playwright
 
 # @Author: 花菜
 # @File: conftest.py
